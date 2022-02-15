@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Blank</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        input[type="date"]{
+            background-color: #0080ff;
+            padding:15px;
+            position:absolute;
+            transform:translate(-50%,-50%);
+            top:50%;
+            left:50%;
+            font-family: "Roboto Mono";
+            color:#fff;
+            font-size:18px;
+            border:none;
+            outline:none;
+            border-radius:5px;
+        }input[type=date]::-webkit-calendar-picker-indicator{
+                     background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyNC4zLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGFhZ18xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgdmlld0JveD0iMCAwIDYwMCA2MDAiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDYwMCA2MDA7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+DQoJLnN0MHtmaWxsOiNGRkZGRkY7fQ0KPC9zdHlsZT4NCjxnPg0KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMjguOTksODRjMC0xMy41OCwwLTI2LjM5LDAtMzkuNmMxMy4yOCwwLDI2LjMyLDAsMzkuNzksMGMwLDEyLjkxLDAsMjUuODQsMCwzOS4xOA0KCQljODguMTIsMCwxNzUuODMsMCwyNjQuMTMsMGMwLTEyLjk3LDAtMjYuMDIsMC0zOS4zMmMxMy41MiwwLDI2LjQ1LDAsMzkuOTcsMGMwLDEzLjA5LDAsMjYuMTUsMCwzOS43NGM4LjA0LDAsMTUuNDgtMC4wMSwyMi45MywwDQoJCWMzNC43LDAuMDcsNjEuMTYsMjYuMzksNjEuMTcsNjFjMC4wMywxMTYuNjYsMC4wMywyMzMuMzEsMCwzNDkuOTdjLTAuMDEsMzQuNi0yNi40Niw2MS02MS4xNyw2MS4wMQ0KCQljLTEyOS44MiwwLjAzLTI1OS42NCwwLjAzLTM4OS40NywwYy0zNC45OS0wLjAxLTYxLjM0LTI2LjQtNjEuMzUtNjEuMzNjLTAuMDEtMTE2LjQ5LTAuMDItMjMyLjk4LDAtMzQ5LjQ3DQoJCWMwLjAxLTM0LjY1LDI2LjQxLTYxLjEsNjEtNjEuMThDMTEzLjQ3LDgzLjk5LDEyMC45Myw4NCwxMjguOTksODR6IE04NSwyMzIuMjVjMCwyLjA5LDAsMy41OSwwLDUuMDljMCw4NS40OSwwLDE3MC45OCwwLDI1Ni40OA0KCQljMCwxNC4xOCw4LjA4LDIyLjE5LDIyLjM4LDIyLjE5YzEyOC45OSwwLjAxLDI1Ny45OCwwLjAxLDM4Ni45NywwYzE0LjYzLDAsMjIuNjUtNy45MywyMi42NS0yMi40M2MwLjAxLTg1LjMzLDAtMTcwLjY1LDAtMjU1Ljk4DQoJCWMwLTEuNzYsMC0zLjUyLDAtNS4zNUMzNzIuNzEsMjMyLjI1LDIyOS4xMiwyMzIuMjUsODUsMjMyLjI1eiBNODUuMDgsMTkxLjYyYzE0NC4zMiwwLDI4Ny45OSwwLDQzMS44NywwDQoJCWMwLTE2LjY5LDAuMjktMzMuMDEtMC4xMS00OS4zMWMtMC4yMi05LjE2LTcuMzctMTcuMDEtMTYuNjItMTcuODljLTguODUtMC44NC0xNy44NS0wLjE4LTI3LjM3LTAuMThjMCwxMy40LDAsMjYuNDUsMCwzOS40OQ0KCQljLTEzLjUyLDAtMjYuNDQsMC0zOS45NSwwYzAtMTMuMzEsMC0yNi4zNiwwLTM5LjMzYy04OC4yOCwwLTE3NS45NiwwLTI2NC4wNiwwYzAsMTMuMzIsMCwyNi4yNSwwLDM5LjIzYy0xMy40NiwwLTI2LjUsMC0zOS45NSwwDQoJCWMwLTEzLjI5LDAtMjYuMjIsMC0zOS40NmMtOS4xOSwwLTE4LjAyLTAuNTgtMjYuNzUsMC4xNmMtOS4xOSwwLjc3LTE2LjY2LDguNTEtMTYuOTIsMTcuNjMNCgkJQzg0Ljc0LDE1OC40MSw4NS4wOCwxNzQuODgsODUuMDgsMTkxLjYyeiIvPg0KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMjEuMjQsMzEzLjcyYzAtMTMuMTgsMC0yNi4wOCwwLTM5LjM1YzEzLjA3LDAsMjYuMDksMCwzOS40NCwwYzAsMTMuMDMsMCwyNi4wNSwwLDM5LjM1DQoJCUMxNDcuNjMsMzEzLjcyLDEzNC43MywzMTMuNzIsMTIxLjI0LDMxMy43MnoiLz4NCgk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjQwLjcsMzEzLjc1Yy0xMy4xMiwwLTI2LjAzLDAtMzkuMzIsMGMwLTEzLjAyLDAtMjYuMDQsMC0zOS40YzEyLjk4LDAsMjUuOTksMCwzOS4zMiwwDQoJCUMyNDAuNywyODcuNDUsMjQwLjcsMzAwLjQ3LDI0MC43LDMxMy43NXoiLz4NCgk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMzIwLjc3LDI3NC4yOGMwLDEzLjE4LDAsMjYuMDksMCwzOS4zNmMtMTMuMDgsMC0yNi4xLDAtMzkuNDQsMGMwLTEzLjA0LDAtMjYuMDYsMC0zOS4zNg0KCQlDMjk0LjM3LDI3NC4yOCwzMDcuMjcsMjc0LjI4LDMyMC43NywyNzQuMjh6Ii8+DQoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTM2MS4xMiwzMTMuNjZjMC0xMy4yNCwwLTI2LjAyLDAtMzkuMjRjMTMuMDgsMCwyNi4xLDAsMzkuNSwwYzAsMTIuODUsMCwyNS44NywwLDM5LjI0DQoJCUMzODcuNjMsMzEzLjY2LDM3NC42MSwzMTMuNjYsMzYxLjEyLDMxMy42NnoiLz4NCgk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNDQxLjM3LDI3NC4yNGMxMy4yOCwwLDI2LjE4LDAsMzkuMzYsMGMwLDEzLjE0LDAsMjYuMDQsMCwzOS4zNWMtMTIuOTQsMC0yNS45NywwLTM5LjM2LDANCgkJQzQ0MS4zNywzMDAuNjksNDQxLjM3LDI4Ny42Nyw0NDEuMzcsMjc0LjI0eiIvPg0KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNjAuNiwzOTMuOGMtMTMuMTgsMC0yNi4wOCwwLTM5LjI5LDBjMC0xMy4yMiwwLTI2LjI0LDAtMzkuNTNjMTMuMDksMCwyNS45OSwwLDM5LjI5LDANCgkJQzE2MC42LDM2Ny4yNSwxNjAuNiwzODAuMjcsMTYwLjYsMzkzLjh6Ii8+DQoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTI0MC43NSwzNTQuMjljMCwxMy4xNCwwLDI2LjA0LDAsMzkuMzNjLTEzLjAzLDAtMjYuMDUsMC0zOS40MSwwYzAtMTIuOTksMC0yNi4wMSwwLTM5LjMzDQoJCUMyMTQuMzQsMzU0LjI5LDIyNy4yNCwzNTQuMjksMjQwLjc1LDM1NC4yOXoiLz4NCgk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjgxLjI0LDM5My42NGMwLTEzLjI4LDAtMjYuMTgsMC0zOS4zNmMxMy4xNCwwLDI2LjA0LDAsMzkuMzUsMGMwLDEyLjk1LDAsMjUuOTcsMCwzOS4zNg0KCQlDMzA3LjY5LDM5My42NCwyOTQuNjcsMzkzLjY0LDI4MS4yNCwzOTMuNjR6Ii8+DQoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTM2MS4yMywzOTMuNjNjMC0xMy4yNywwLTI2LjE3LDAtMzkuMzVjMTMuMTMsMCwyNi4wNCwwLDM5LjM1LDBjMCwxMi45MywwLDI1Ljk2LDAsMzkuMzUNCgkJQzM4Ny42OSwzOTMuNjMsMzc0LjY3LDM5My42MywzNjEuMjMsMzkzLjYzeiIvPg0KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik00ODAuNzIsMzkzLjc2Yy0xMy4xOCwwLTI2LjA4LDAtMzkuMzUsMGMwLTEzLjA3LDAtMjYuMDksMC0zOS40NGMxMy4wMywwLDI2LjA1LDAsMzkuMzUsMA0KCQlDNDgwLjcyLDM2Ny4zNyw0ODAuNzIsMzgwLjI3LDQ4MC43MiwzOTMuNzZ6Ii8+DQoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTE2MC43Niw0MzQuMzdjMCwxMy4yOCwwLDI2LjE4LDAsMzkuMzZjLTEzLjEzLDAtMjYuMDQsMC0zOS4zNSwwYzAtMTIuOTQsMC0yNS45NiwwLTM5LjM2DQoJCUMxMzQuMzEsNDM0LjM3LDE0Ny4zMyw0MzQuMzcsMTYwLjc2LDQzNC4zN3oiLz4NCgk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjAxLjQxLDQzNC4xOWMxMy4xNSwwLDI2LjA1LDAsMzkuMjcsMGMwLDEzLjIxLDAsMjYuMjMsMCwzOS41M2MtMTMuMDUsMC0yNS45NiwwLTM5LjI3LDANCgkJQzIwMS40MSw0NjAuNzgsMjAxLjQxLDQ0Ny43NiwyMDEuNDEsNDM0LjE5eiIvPg0KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0zMjAuNjIsNDczLjc4Yy0xMy4yMywwLTI2LjEzLDAtMzkuMzMsMGMwLTEzLjEyLDAtMjYuMDIsMC0zOS4zNWMxMi45LDAsMjUuOTIsMCwzOS4zMywwDQoJCUMzMjAuNjIsNDQ3LjI4LDMyMC42Miw0NjAuMywzMjAuNjIsNDczLjc4eiIvPg0KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0zNjEuMzcsNDM0LjIzYzEzLjI2LDAsMjYuMTYsMCwzOS4zNSwwYzAsMTMuMTMsMCwyNi4wMywwLDM5LjM1Yy0xMi45MywwLTI1Ljk1LDAtMzkuMzUsMA0KCQlDMzYxLjM3LDQ2MC43LDM2MS4zNyw0NDcuNjgsMzYxLjM3LDQzNC4yM3oiLz4NCjwvZz4NCjwvc3ZnPg0K");
+
+                     padding:5px;
+            cursor:pointer;
+            border-radius:3px;
+        }
+
+        .base64 {
+            background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyNC4zLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGFhZ18xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgdmlld0JveD0iMCAwIDYwMCA2MDAiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDYwMCA2MDA7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+DQoJLnN0MHtmaWxsOiNGRkZGRkY7fQ0KPC9zdHlsZT4NCjxnPg0KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMjguOTksODRjMC0xMy41OCwwLTI2LjM5LDAtMzkuNmMxMy4yOCwwLDI2LjMyLDAsMzkuNzksMGMwLDEyLjkxLDAsMjUuODQsMCwzOS4xOA0KCQljODguMTIsMCwxNzUuODMsMCwyNjQuMTMsMGMwLTEyLjk3LDAtMjYuMDIsMC0zOS4zMmMxMy41MiwwLDI2LjQ1LDAsMzkuOTcsMGMwLDEzLjA5LDAsMjYuMTUsMCwzOS43NGM4LjA0LDAsMTUuNDgtMC4wMSwyMi45MywwDQoJCWMzNC43LDAuMDcsNjEuMTYsMjYuMzksNjEuMTcsNjFjMC4wMywxMTYuNjYsMC4wMywyMzMuMzEsMCwzNDkuOTdjLTAuMDEsMzQuNi0yNi40Niw2MS02MS4xNyw2MS4wMQ0KCQljLTEyOS44MiwwLjAzLTI1OS42NCwwLjAzLTM4OS40NywwYy0zNC45OS0wLjAxLTYxLjM0LTI2LjQtNjEuMzUtNjEuMzNjLTAuMDEtMTE2LjQ5LTAuMDItMjMyLjk4LDAtMzQ5LjQ3DQoJCWMwLjAxLTM0LjY1LDI2LjQxLTYxLjEsNjEtNjEuMThDMTEzLjQ3LDgzLjk5LDEyMC45Myw4NCwxMjguOTksODR6IE04NSwyMzIuMjVjMCwyLjA5LDAsMy41OSwwLDUuMDljMCw4NS40OSwwLDE3MC45OCwwLDI1Ni40OA0KCQljMCwxNC4xOCw4LjA4LDIyLjE5LDIyLjM4LDIyLjE5YzEyOC45OSwwLjAxLDI1Ny45OCwwLjAxLDM4Ni45NywwYzE0LjYzLDAsMjIuNjUtNy45MywyMi42NS0yMi40M2MwLjAxLTg1LjMzLDAtMTcwLjY1LDAtMjU1Ljk4DQoJCWMwLTEuNzYsMC0zLjUyLDAtNS4zNUMzNzIuNzEsMjMyLjI1LDIyOS4xMiwyMzIuMjUsODUsMjMyLjI1eiBNODUuMDgsMTkxLjYyYzE0NC4zMiwwLDI4Ny45OSwwLDQzMS44NywwDQoJCWMwLTE2LjY5LDAuMjktMzMuMDEtMC4xMS00OS4zMWMtMC4yMi05LjE2LTcuMzctMTcuMDEtMTYuNjItMTcuODljLTguODUtMC44NC0xNy44NS0wLjE4LTI3LjM3LTAuMThjMCwxMy40LDAsMjYuNDUsMCwzOS40OQ0KCQljLTEzLjUyLDAtMjYuNDQsMC0zOS45NSwwYzAtMTMuMzEsMC0yNi4zNiwwLTM5LjMzYy04OC4yOCwwLTE3NS45NiwwLTI2NC4wNiwwYzAsMTMuMzIsMCwyNi4yNSwwLDM5LjIzYy0xMy40NiwwLTI2LjUsMC0zOS45NSwwDQoJCWMwLTEzLjI5LDAtMjYuMjIsMC0zOS40NmMtOS4xOSwwLTE4LjAyLTAuNTgtMjYuNzUsMC4xNmMtOS4xOSwwLjc3LTE2LjY2LDguNTEtMTYuOTIsMTcuNjMNCgkJQzg0Ljc0LDE1OC40MSw4NS4wOCwxNzQuODgsODUuMDgsMTkxLjYyeiIvPg0KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMjEuMjQsMzEzLjcyYzAtMTMuMTgsMC0yNi4wOCwwLTM5LjM1YzEzLjA3LDAsMjYuMDksMCwzOS40NCwwYzAsMTMuMDMsMCwyNi4wNSwwLDM5LjM1DQoJCUMxNDcuNjMsMzEzLjcyLDEzNC43MywzMTMuNzIsMTIxLjI0LDMxMy43MnoiLz4NCgk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjQwLjcsMzEzLjc1Yy0xMy4xMiwwLTI2LjAzLDAtMzkuMzIsMGMwLTEzLjAyLDAtMjYuMDQsMC0zOS40YzEyLjk4LDAsMjUuOTksMCwzOS4zMiwwDQoJCUMyNDAuNywyODcuNDUsMjQwLjcsMzAwLjQ3LDI0MC43LDMxMy43NXoiLz4NCgk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMzIwLjc3LDI3NC4yOGMwLDEzLjE4LDAsMjYuMDksMCwzOS4zNmMtMTMuMDgsMC0yNi4xLDAtMzkuNDQsMGMwLTEzLjA0LDAtMjYuMDYsMC0zOS4zNg0KCQlDMjk0LjM3LDI3NC4yOCwzMDcuMjcsMjc0LjI4LDMyMC43NywyNzQuMjh6Ii8+DQoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTM2MS4xMiwzMTMuNjZjMC0xMy4yNCwwLTI2LjAyLDAtMzkuMjRjMTMuMDgsMCwyNi4xLDAsMzkuNSwwYzAsMTIuODUsMCwyNS44NywwLDM5LjI0DQoJCUMzODcuNjMsMzEzLjY2LDM3NC42MSwzMTMuNjYsMzYxLjEyLDMxMy42NnoiLz4NCgk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNDQxLjM3LDI3NC4yNGMxMy4yOCwwLDI2LjE4LDAsMzkuMzYsMGMwLDEzLjE0LDAsMjYuMDQsMCwzOS4zNWMtMTIuOTQsMC0yNS45NywwLTM5LjM2LDANCgkJQzQ0MS4zNywzMDAuNjksNDQxLjM3LDI4Ny42Nyw0NDEuMzcsMjc0LjI0eiIvPg0KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNjAuNiwzOTMuOGMtMTMuMTgsMC0yNi4wOCwwLTM5LjI5LDBjMC0xMy4yMiwwLTI2LjI0LDAtMzkuNTNjMTMuMDksMCwyNS45OSwwLDM5LjI5LDANCgkJQzE2MC42LDM2Ny4yNSwxNjAuNiwzODAuMjcsMTYwLjYsMzkzLjh6Ii8+DQoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTI0MC43NSwzNTQuMjljMCwxMy4xNCwwLDI2LjA0LDAsMzkuMzNjLTEzLjAzLDAtMjYuMDUsMC0zOS40MSwwYzAtMTIuOTksMC0yNi4wMSwwLTM5LjMzDQoJCUMyMTQuMzQsMzU0LjI5LDIyNy4yNCwzNTQuMjksMjQwLjc1LDM1NC4yOXoiLz4NCgk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjgxLjI0LDM5My42NGMwLTEzLjI4LDAtMjYuMTgsMC0zOS4zNmMxMy4xNCwwLDI2LjA0LDAsMzkuMzUsMGMwLDEyLjk1LDAsMjUuOTcsMCwzOS4zNg0KCQlDMzA3LjY5LDM5My42NCwyOTQuNjcsMzkzLjY0LDI4MS4yNCwzOTMuNjR6Ii8+DQoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTM2MS4yMywzOTMuNjNjMC0xMy4yNywwLTI2LjE3LDAtMzkuMzVjMTMuMTMsMCwyNi4wNCwwLDM5LjM1LDBjMCwxMi45MywwLDI1Ljk2LDAsMzkuMzUNCgkJQzM4Ny42OSwzOTMuNjMsMzc0LjY3LDM5My42MywzNjEuMjMsMzkzLjYzeiIvPg0KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik00ODAuNzIsMzkzLjc2Yy0xMy4xOCwwLTI2LjA4LDAtMzkuMzUsMGMwLTEzLjA3LDAtMjYuMDksMC0zOS40NGMxMy4wMywwLDI2LjA1LDAsMzkuMzUsMA0KCQlDNDgwLjcyLDM2Ny4zNyw0ODAuNzIsMzgwLjI3LDQ4MC43MiwzOTMuNzZ6Ii8+DQoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTE2MC43Niw0MzQuMzdjMCwxMy4yOCwwLDI2LjE4LDAsMzkuMzZjLTEzLjEzLDAtMjYuMDQsMC0zOS4zNSwwYzAtMTIuOTQsMC0yNS45NiwwLTM5LjM2DQoJCUMxMzQuMzEsNDM0LjM3LDE0Ny4zMyw0MzQuMzcsMTYwLjc2LDQzNC4zN3oiLz4NCgk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjAxLjQxLDQzNC4xOWMxMy4xNSwwLDI2LjA1LDAsMzkuMjcsMGMwLDEzLjIxLDAsMjYuMjMsMCwzOS41M2MtMTMuMDUsMC0yNS45NiwwLTM5LjI3LDANCgkJQzIwMS40MSw0NjAuNzgsMjAxLjQxLDQ0Ny43NiwyMDEuNDEsNDM0LjE5eiIvPg0KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0zMjAuNjIsNDczLjc4Yy0xMy4yMywwLTI2LjEzLDAtMzkuMzMsMGMwLTEzLjEyLDAtMjYuMDIsMC0zOS4zNWMxMi45LDAsMjUuOTIsMCwzOS4zMywwDQoJCUMzMjAuNjIsNDQ3LjI4LDMyMC42Miw0NjAuMywzMjAuNjIsNDczLjc4eiIvPg0KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0zNjEuMzcsNDM0LjIzYzEzLjI2LDAsMjYuMTYsMCwzOS4zNSwwYzAsMTMuMTMsMCwyNi4wMywwLDM5LjM1Yy0xMi45MywwLTI1Ljk1LDAtMzkuMzUsMA0KCQlDMzYxLjM3LDQ2MC43LDM2MS4zNyw0NDcuNjgsMzYxLjM3LDQzNC4yM3oiLz4NCjwvZz4NCjwvc3ZnPg0K")
+        }
+    </style>
+</head>
+
+<body id="page-top">
+<input type="date">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="index.php">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Interface
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Components</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Components:</h6>
+                        <a class="collapse-item" href="buttons.html">Buttons</a>
+                        <a class="collapse-item" href="cards.html">Cards</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Utilities</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Utilities:</h6>
+                        <a class="collapse-item" href="utilities-color.html">Colors</a>
+                        <a class="collapse-item" href="utilities-border.html">Borders</a>
+                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
+                        <a class="collapse-item" href="utilities-other.html">Other</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Addons
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item active">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+                    aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Pages</span>
+                </a>
+                <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Login Screens:</h6>
+                        <a class="collapse-item" href="login.php">Login</a>
+                        <a class="collapse-item" href="register.html">Register</a>
+                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Other Pages:</h6>
+                        <a class="collapse-item" href="404.html">404 Page</a>
+                        <a class="collapse-item active" href="blank.html">Blank Page</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Charts</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tables</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - Alerts -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <!-- Counter - Alerts -->
+                                <span class="badge badge-danger badge-counter">3+</span>
+                            </a>
+                            <!-- Dropdown - Alerts -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">
+                                    Alerts Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 12, 2019</div>
+                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-success">
+                                            <i class="fas fa-donate text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 7, 2019</div>
+                                        $290.29 has been deposited into your account!
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-warning">
+                                            <i class="fas fa-exclamation-triangle text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 2, 2019</div>
+                                        Spending Alert: We've noticed unusually high spending for your account.
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - Messages -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-envelope fa-fw"></i>
+                                <!-- Counter - Messages -->
+                                <span class="badge badge-danger badge-counter">7</span>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="messagesDropdown">
+                                <h6 class="dropdown-header">
+                                    Message Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div class="font-weight-bold">
+                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                                            problem I've been having.</div>
+                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                            alt="...">
+                                        <div class="status-indicator"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">I have the photos that you ordered last month, how
+                                            would you like them sent to you?</div>
+                                        <div class="small text-gray-500">Jae Chun · 1d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                            alt="...">
+                                        <div class="status-indicator bg-warning"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Last month's report looks great, I am very happy with
+                                            the progress so far, keep up the good work!</div>
+                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                                            told me that people say this to all dogs, even if they aren't good...</div>
+                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                            </div>
+                        </li>
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <img class="img-profile rounded-circle"
+                                    src="img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.php">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>
