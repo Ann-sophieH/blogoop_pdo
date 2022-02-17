@@ -93,18 +93,18 @@
             global $database;
             foreach($categoriesArray as $categoryId){
 
-                $sql =  "INSERT INTO `photos_categories` (`photo_id`, `category_id`) VALUES ($photoId,$categoryId)";
-                $database->query($sql);
+                $sql =  "INSERT INTO `photos_categories` (`photo_id`, `category_id`) VALUES (:photoId,:categoryId)";
+                $database->query($sql,array(':photo_id'=> $photoId, ':categoryId'=>$categoryId));
 
             }
         }
         public static function attachedCategories($photoId){
             global $database;
-            $sql = "SELECT category_id FROM `photos_categories` WHERE photo_id=".$photoId;
-            $result = $database->query($sql);
+            $sql = "SELECT category_id FROM `photos_categories` WHERE photo_id = :photo_id";
+            $result = $database->query($sql, array(':photo_id'=> $photoId));
             $rows = [];
 
-            while($row = $result->fetch_row()) {
+            while($row = $result->fetch(PDO::FETCH_ASSOC)) {
                 $rows[] = $row;
             }
             //Maakt van de rows nu een array naar de category namen.

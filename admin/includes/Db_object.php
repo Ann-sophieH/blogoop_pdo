@@ -2,9 +2,9 @@
     class Db_object{
         /*** METHODS ***/
         /**QUERY**/
-        public static function find_this_query($sql){
+        public static function find_this_query($sql, $properties= NULL){
             global $database;
-            $result = $database->query($sql);
+            $result = $database->query($sql, $properties);
             $the_object_array = array();
             while($row = $result->fetch(PDO::FETCH_ASSOC)){ //fetch next row of results as associative array
                 $the_object_array[] = static::instantie($row); //instantieren van object rij per rij in functie instantie()
@@ -15,7 +15,7 @@
             return static::find_this_query("SELECT * FROM " . static::$db_table . " ");
         }
         public static function find_by_id($id){
-            $result = static::find_this_query("SELECT * FROM ". static::$db_table." WHERE id=$id"); //hier nog beveiliging opsteken ?
+            $result = static::find_this_query("SELECT * FROM ". static::$db_table." WHERE id= :id", array(':id'=>$id));
             return !empty($result) ? array_shift($result) : false;
             /* return static::find_this_query("SELECT * FROM users WHERE id=$user_id");*/
         }
@@ -45,12 +45,13 @@
             $properties = $this->properties();
             $sql = "INSERT INTO ". static::$db_table . " (" .implode(",",array_keys($properties)). ")";
             $sql .= " VALUES (:" . implode(",:", array_keys($properties)) . ")";
-            $stmt = $database->connection->prepare($sql); //preps sql statement & stores w/o executing
-            foreach($properties as $key => $value){ //loopt door properties en scheidt de kolomnaam (key) van de waarde (value)
+            //$stmt = $database->connection->prepare($sql); //preps sql statement & stores w/o executing
+            /*foreach($properties as $key => $value){ //loopt door properties en scheidt de kolomnaam (key) van de waarde (value)
                     $key_name = ":".$key; //bindingteken voor key plaatsen
                     $stmt->bindValue($key_name,$value); //Binds a value to a parameter
-                }
-            if($stmt->execute()){ //voer query uit
+                }*/
+
+            if($database->query($sql,$properties)){ //voer query uit
                 $this->id = $database->the_insert_id(); //id ophalen van laatst gevormde query
                 return true; //nodig?
             }else{
@@ -60,7 +61,7 @@
         public function update(){
             global $database;
             $properties = $this->properties();
-            $properties['id'] = $this->id;
+            $properties['id'] = $this->id; //zorgen dat er evenveel parameters zijn als values
             $properties_assoc = array();
             foreach($properties as $key => $value){ //hier moet $key => $key?
                 $properties_assoc[] = "{$key}=:{$key}";//voor elke property de placeholder eraan binden om in sql te steken
@@ -69,25 +70,22 @@
             $sql .= implode(", ",$properties_assoc); //hier array met bv username=:username, address=:address
             $sql .= " WHERE id= :id"; // id ook met placeholder of gwn typecasting voldoende om sql injectie te vermijden
             // tc ->sneller?
-            $stmt = $database->connection->prepare($sql);
-            foreach($properties as $key => $value){
-                $key_name = ":".$key;
-                $stmt->bindValue($key_name,$value); //Binds a value to a parameter
-            }
-            $stmt->execute($properties);
-            $db = $stmt->rowCount();
-            return  $db == 1 ? true : false;
+            /*
+            /* Array keys CAN be prefixed with colons ":" too (optional) */
+            /*foreach($properties as $key => $value){//facultatief maar maakt code duidelijker
+                $key_name = ":".$key; //als je properties in execute plaatst is binding overbodig
+                $stmt->bindValue($key_name,$value); //Binds a value to a parameter with :
+            }*/
+            $stmt = $database->query($sql, $properties); //
+
+            return  $stmt->rowCount() == 1; //? true : false;
         }
         public function delete(){
             global $database;
-
             $sql = "DELETE FROM ". static::$db_table . " ";
             $sql .= "WHERE id= :id"; //. $this->id;
             $sql .= " LIMIT 1";
-
-            $stmt = $database->connection->prepare($sql);
-            $stmt->bindValue(':id',$this->id);
-            $stmt->execute();
+            $stmt = $database->query($sql, array(':id'=>$this->id));
             //$affected_rows = $stmt->rowCount();
             return $stmt->rowCount()== 1;
             //return mysqli_affected_rows($database->connection) == 1 ? true : false;
